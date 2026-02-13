@@ -140,19 +140,3 @@ export const resolveTurn = async (
         };
     }
 };
-
-export const generateImage = async (prompt: string): Promise<string> => {
-    try {
-        const finalPrompt = `High quality 16-bit pixel art style. ${prompt}. NO TEXT. NO BUBBLES. Warm festive palette.`;
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash-image',
-            contents: finalPrompt,
-        });
-        for (const part of response.candidates?.[0]?.content?.parts || []) {
-            if (part.inlineData) return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
-        }
-        return "https://picsum.photos/600/400?grayscale";
-    } catch (e) {
-        return "https://picsum.photos/600/400?blur";
-    }
-}

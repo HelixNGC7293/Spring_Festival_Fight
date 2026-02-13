@@ -4,7 +4,8 @@ import GameLog from './components/GameLog';
 import ActionPanel from './components/ActionPanel';
 import { Character, RoleType, GamePhase, LogEntry, GameCard } from './types';
 import { MAX_ROUNDS, ROLE_DETAILS } from './constants';
-import { generateCards, resolveTurn, generateImage } from './services/geminiService';
+import { generateCards, resolveTurn } from './services/geminiService';
+import { generateSceneImage } from './services/zImageService';
 
 const BOSS_MAX_ROUNDS = 3;
 
@@ -36,7 +37,7 @@ const App: React.FC = () => {
     }));
     setCharacters(initialChars);
     setLogs([{ id: 'init', speaker: 'System', text: '除夕夜，硝烟起。你不仅要活下去，还要活得有面子。', type: 'system' }]);
-    generateImage("Chinese New Year festive house front door, 16-bit pixel art").then(setSceneImage);
+    generateSceneImage("Chinese New Year festive house front door, 16-bit pixel art").then(setSceneImage);
     setPhase(GamePhase.INTRO);
   };
 
@@ -69,7 +70,7 @@ const App: React.FC = () => {
             addLog('System', isPlayerBoss ? '你现在是全场焦点，所有人都在酸你，顶住压力！' : `【${bossRole}】表现太出色了，大家决定集体围攻他！`, 'system');
             
             const prompt = `A 16-bit pixel art of ${bossRole} standing proudly at the head of a Chinese dinner table, others looking jealous and pointing fingers. Dramatic lighting.`;
-            const img = await generateImage(prompt);
+            const img = await generateSceneImage(prompt);
             setSceneImage(img);
             
             setTimeout(() => {
@@ -135,7 +136,7 @@ const App: React.FC = () => {
         });
         setCharacters(newChars);
 
-        if (result.summaryPrompt) generateImage(result.summaryPrompt).then(setSceneImage);
+        if (result.summaryPrompt) generateSceneImage(result.summaryPrompt).then(setSceneImage);
 
         if (isBossMode) {
             setBossRound(r => r + 1);
