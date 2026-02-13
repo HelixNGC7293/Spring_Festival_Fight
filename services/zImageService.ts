@@ -72,7 +72,7 @@ export const generateZTextToImage = async (
     } = options;
 
     // Use process.env.FAL_KEY or fallback to the key provided in .env content
-    const apiKey = process.env.VITE_FAL_KEY;
+    const apiKey = "f30533d2-a0f6-41cd-a97f-0b707639834a:3aea46a1c89965eefed79398493b934b";
     
     if (!apiKey) {
         console.error("[ZImage] API key not configured (FAL_KEY)");
