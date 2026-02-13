@@ -33,8 +33,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          FAL_KEY: ${{ secrets.FAL_KEY }}
+          REACT_GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          REACT_FAL_KEY: ${{ secrets.FAL_KEY }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
