@@ -2,7 +2,7 @@ import { GoogleGenAI, Type } from "@google/genai";
 import { GameCard, RoleType, Character, RoundResult } from '../types';
 import { SYSTEM_INSTRUCTION, ROLE_DETAILS } from '../constants';
 
-const ai = new GoogleGenAI({ apiKey: process.env.REACT_GEMINI_API_KEY });
+const ai = new GoogleGenAI({ apiKey: process.env.VITE_GEMINI_API_KEY });
 
 const cleanJson = (text: string) => {
   let clean = text.trim();
